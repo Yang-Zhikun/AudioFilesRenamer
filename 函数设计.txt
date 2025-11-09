@@ -1,0 +1,29 @@
+AudioFilesRenamer:
+
+    init(length, height): 传入窗口的宽和高，初始化图形界面的布局和按钮
+        init_background(): 将背景划分为三部分：顶部按钮区，左边源文件，右边预览区，底部输出栏
+        init_buttons():选择文件夹、创建命名规则、文件名预览、重命名、退出
+        init_sourceFiles_area():区域顶部显示文件名、编号、各种元数据
+        init_preview_area():区域顶部显示文件名、编号、各种元数据
+        init_output_area():用于输出
+    
+    choose_dir(): 选择文件夹，并进行筛选，输出到源文件列表，在输出栏输出信息
+        scan_audio_files(dir)-> list: 读取目录中的音频文件mp3/wav/flac
+        output_to_sourceFiles_area()-> None: 输出到源文件列表
+        
+    create_rename_rule()-> dictOfNoneOrTrue: 创建命名规则,弹出窗口让用户选择文件名要出现的元数据类型或加载保存的规则，并保存配置字典文件
+        save_rename_rule(): 保存配置文件
+        load_rename_rule(): 从配置文件加载保存的规则
+    
+    preview_rename()-> listOfNewFilenames: 在预览区中预览每个文件的文件名，返回新文件名列表
+        generate_filename()-> str: 生成一个文件的文件名，并检查
+            get_audio_metadata(filename)-> dictOfMetadatat: 根据规则,提取一个音频文件的元数据
+            handle_missing_metadata(filename)-> dictOfMetadata:处理元数据缺失情况,弹窗让用户选择输入缺失元数据还是跳过
+                input_metadata()-> str: 输入规则中缺失的元数据
+        
+
+    rename_files(listOfNewFilenames): 执行重命名
+        validate_rename_operations()  // 新增：验证所有重命名操作合法性
+        handle_file_conflicts()       // 新增：处理文件名冲突
+        create_undo_snapshot()        // 新增：创建操作快照用于撤销
+        
