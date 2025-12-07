@@ -5,7 +5,6 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
 import os
-import re
 
 class AudioFilesRenamer:
     """音频文件批量重命名工具类"""

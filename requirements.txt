@@ -1,2 +1,0 @@
-mutagen>=1.46.0
-chardet>=5.2.0
